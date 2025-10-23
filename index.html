@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Monthsary My Bunchy 💛</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(180deg, #0a0f1f, #1a2238);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      font-family: 'Poppins', sans-serif;
+      color: white;
+    }
+
+    .slideshow-container {
+      position: relative;
+      width: 90%;
+      max-width: 900px;
+      height: 550px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+    }
+
+    .slide {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .slide.active {
+      opacity: 1;
+      z-index: 1;
+    }
+
+    /* Greeting text overlay */
+    .greeting {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 2;
+      color: #fff;
+      text-shadow: 0 3px 10px rgba(0,0,0,0.6);
+      animation: fadeIn 3s ease-in-out forwards;
+    }
+
+    .greeting h1 {
+      font-size: 48px;
+      margin-bottom: 12px;
+    }
+
+    .greeting p {
+      font-size: 18px;
+      opacity: 0.9;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translate(-50%, -60%); }
+      to { opacity: 1; transform: translate(-50%, -50%); }
+    }
+
+    /* Music button */
+    .music-control {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      border-radius: 12px;
+      padding: 10px 14px;
+      cursor: pointer;
+      z-index: 5;
+      transition: 0.3s;
+    }
+
+    .music-control:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    /* Caption */
+    .caption {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+      text-align: center;
+      font-weight: 500;
+      font-size: 18px;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.7);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slideshow-container">
+    <!-- Greeting slide -->
+    <div class="greeting">
+      <h1>Happy Monthsary, My Bunchy ❤️</h1>
+      <p>Every day with you is my favorite story. I love you endlessly.</p>
+      Bunchy i just wanted to say that no matter what, I'm not giving up on you
+                     kahit na magkatampohan tayo, <br>
+                     We both gonna have good days or bad days mag sstay parin ako sayo
+                     Choosing you to love you was the best decision i've ever made.❤️<br>
+                     
+                     You are the most wonderful person i've ever met.<br>
+                     And the BEST PART of my LIFE💕<br>
+
+    </div>
+
+    <!-- Slideshow images -->
+    <div class="slide active"><img src="photo1.jpg" alt="Photo 1"></div>
+    <div class="slide"><img src="photo.2.jpg" alt="Photo 2"></div>
+    <div class="slide"><img src="photo3.jpg" alt="Photo 3"></div>
+    <div class="slide"><img src="photo4.jpg" alt="Photo 4"></div>
+
+    <!-- Caption -->
+    <div class="caption">Together is my favorite place to be ❤️</div>
+
+    <!-- Music control -->
+    <button class="music-control" id="musicBtn">🎵 Play Music</button>
+  </div>
+
+  <!-- Background music -->
+  <audio id="bgm" loop>
+    <source src="ikaw-at-ako-tj-monterde-piano-cover-by-gerard-chua_EgMTEQcN.mp3" type="audio/mpeg">
+    Your browser does not support audio.
+  </audio>
+
+  <script>
+    // Slideshow logic
+    const slides = document.querySelectorAll('.slide');
+    let index = 0;
+
+    function showSlide(i) {
+      slides.forEach((s, idx) => s.classList.toggle('active', idx === i));
+    }
+
+    setInterval(() => {
+      index = (index + 1) % slides.length;
+      showSlide(index);
+    }, 4000); // 4 seconds per slide
+
+    // Background music control
+    const bgm = document.getElementById('bgm');
+    const btn = document.getElementById('musicBtn');
+
+    btn.addEventListener('click', async () => {
+      if (bgm.paused) {
+        try {
+          await bgm.play();
+          btn.textContent = '⏸ Pause Music';
+        } catch (err) {
+          alert('Click anywhere on the page to enable music playback 🎶');
+        }
+      } else {
+        bgm.pause();
+        btn.textContent = '🎵 Play Music';
+      }
+    });
+
+    // Allow click anywhere to start music
+    document.body.addEventListener('click', () => {
+      if (bgm.paused) {
+        bgm.play().then(() => (btn.textContent = '⏸ Pause Music')).catch(() => {});
+      }
+    });
+  </script>
+</body>
+</html>
